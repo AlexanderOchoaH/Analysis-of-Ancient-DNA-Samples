@@ -2,7 +2,7 @@
 
 ### 1. Pipeline for Genus Abundance Estimation from Ancient DNA PE Reads.
 
-Step 1: Used AdapterRemoval v2.3.2 (Schubert et al. 2014; [https://github.com/MikkelSchubert/adapterremoval](url)) for the trimming and collapsing of AVITI PE150 reads.
+Step 1: Used AdapterRemoval v2.3.2 (Schubert et al. 2016; [https://github.com/MikkelSchubert/adapterremoval](url)) for the trimming and collapsing of AVITI PE150 reads.
 
 `AdapterRemoval --file1 R1.fastq.gz --file2 R2.fastq.gz --mm 3 --minlength 25 --collapse --trimns --trimqualities --qualitymax 50 --basename trimmed_reads
 `
@@ -41,3 +41,17 @@ Step 2: Used SAMtools v1.21 (Li et al. 2009; [https://github.com/samtools/samtoo
 Step 3: Used ANGSD v0.941 (Korneliussen et al. 2014; [https://github.com/ANGSD/angsd](url)) to create a consensus sequence based on effective depth.
 
 `angsd -i reads.mq30.lowMismatch.bam -minQ 30 -uniqueOnly 1 -setMinDepth 1 -setMaxDepth -1 -doFasta 3 -doCounts 1 -ref reference.fasta -out reads.mq30.lowMismatch`
+
+### References
+
+Korneliussen, T.S., Albrechtsen, A., and Nielsen, R. (2014). ANGSD: Analysis of Next Generation Sequencing Data. (2014). BMC Bioinformatics 15, 356. (doi:10.1186/s12859-014-0356-4)
+
+Li, H., Handsaker, B., Wysoker, A., Fennell, T., Ruan, J., Homer, N., Marth, G., Abecasis, G., Durbin, R., and 1000 Genome Project Data Processing Subgroup. (2009). The Sequence Alignment/Map format and SAMtools. Bioinformatics 25, 2078–2079. (doi:10.1093/bioinformatics/btp352)
+
+Lu, J., Breitwieser, F.P., Thielen, P., and Salzberg, S.L. (2017). Bracken: estimating species abundance in metagenomics data. PeerJ Comput. Sci. 3, e104. (doi:10.7717/peerj-cs.104)
+
+Schubert, M., Ermini, L., Der Sarkissian, C., Jónsson, H., Ginolhac, A., Schaefer, R., Martin, M.D., Fernández, R., Kircher, M., McCue, M., et al. (2014). Characterization of ancient and modern genomes by SNP detection and phylogenomic and metagenomic analysis using PALEOMIX. Nat. Protoc. 9, 1056–1082. (doi:10.1038/nprot.2014.063)
+
+Schubert, M., Lindgreen, S., and Orlando, L. (2016). AdapterRemoval v2: rapid adapter trimming, identification, and read merging. BMC Res. Notes 9, 88. (doi:10.1186/s13104-016-1900-2)
+
+Wood, D.E., Lu, J., and Langmead, B. (2019). Improved metagenomic analysis with Kraken 2. Genome Biol. 20, 257. (doi:10.1186/s13059-019-1891-0)
