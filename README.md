@@ -34,13 +34,13 @@ Step 1: Used a YAML file (paleomix.yml) as input and PALEOMIX v1.3.8 (Schubert e
 
 Step 2: Used SAMtools v1.21 (Li et al. 2009; [https://github.com/samtools/samtools/releases](url)) to remove reads with mapping scores <30 and then those with mismatch rates ≥0.02 from the resulting BAM file.
 
-`samtools view -b -q 30 reads.bam > reads.mq30.bam`
+`samtools view -b -q 30 Target_reads.Mapping.bam > Target_reads.Mapping.mq30.bam`
 
-`samtools view -bh -e '[NM]/length(seq) < 0.02' reads.mq30.bam > reads.mq30.lowMismatch.bam`
+`samtools view -bh -e '[NM]/length(seq) < 0.02' Target_reads.Mapping.mq30.bam > Target_reads.Mapping.mq30.lowMismatch.bam`
 
 Step 3: Used ANGSD v0.941 (Korneliussen et al. 2014; [https://github.com/ANGSD/angsd](url)) to create a consensus sequence based on effective depth.
 
-`angsd -i reads.mq30.lowMismatch.bam -minQ 30 -uniqueOnly 1 -setMinDepth 1 -setMaxDepth -1 -doFasta 3 -doCounts 1 -ref reference.fasta -out reads.mq30.lowMismatch`
+`angsd -i Target_reads.Mapping.mq30.lowMismatch.bam -minQ 30 -uniqueOnly 1 -setMinDepth 1 -setMaxDepth -1 -doFasta 3 -doCounts 1 -ref reference.fasta -out Target_reads.Mapping.mq30.lowMismatch`
 
 ### References
 
