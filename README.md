@@ -1,6 +1,6 @@
 # Analysis of Ancient DNA Samples
 
-### 1. Pipeline for Genus Abundance Estimation from Ancient DNA PE Reads.
+### 1. Pipeline for Genus Abundance Estimation from Ancient DNA PE Reads
 
 Step 1: Used AdapterRemoval v2.3.2 (Schubert et al. 2016; [https://github.com/MikkelSchubert/adapterremoval](url)) for the trimming and collapsing of AVITI PE150 reads.
 
@@ -26,7 +26,7 @@ Step 4: Used an in-house script (developed by Patrick F. Reilly; [TDB](url)) to 
 `awk -f Bracken_parsing.awk trimmed_reads.collapsed.report.txt.bracken trimmed_reads.paired.report.txt.bracken > trimmed_reads.SUMMARY.report.txt.bracken
 `
 
-### 2. Pipeline for the Mapping and Filtering of Ancient DNA PE Reads.
+### 2. Pipeline for the Mapping and Filtering of Ancient DNA PE Reads
 
 Step 1: Used a YAML file (paleomix.yml) as input and PALEOMIX v1.3.8 (Schubert et al. 2014; [https://github.com/MikkelSchubert/paleomix/releases](url)) for mapping the AVITI PE150 reads to multiple (competitive mapping) or single (non-competitive mapping) references.
 
