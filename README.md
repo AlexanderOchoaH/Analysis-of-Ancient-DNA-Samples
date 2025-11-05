@@ -21,7 +21,7 @@ Step 3: Used Bracken v2.9 (Lu et al. 2017; [https://github.com/jenniferlu717/Bra
 
 `bracken -d /Kraken2_DB/PlusPFP_20210128/ -i trimmed_reads.paired.report.txt -o trimmed_reads.paired.report.txt.bracken -r 150 -l G -t 10`
 
-Step 4: Used an in-house script (developed by Patrick F. Reilly; [TDB](url)) to summarize Bracken results from both collapsed and uncollapsed reads.
+Step 4: Used an in-house script (developed by Patrick F. Reilly; patrick.f.reilly@yale.edu) to summarize Bracken results from both collapsed and uncollapsed reads.
 
 `awk -f Bracken_parsing.awk trimmed_reads.collapsed.report.txt.bracken trimmed_reads.paired.report.txt.bracken > trimmed_reads.SUMMARY.report.txt.bracken
 `
