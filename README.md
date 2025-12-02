@@ -7,23 +7,29 @@ Step 1: Used AdapterRemoval v2.3.2 (Schubert et al. 2016; [https://github.com/Mi
 `AdapterRemoval --file1 R1.fastq.gz --file2 R2.fastq.gz --mm 3 --minlength 25 --collapse --trimns --trimqualities --qualitymax 50 --basename trimmed_reads
 `
 
-Step 2: Used Kraken v2.1.3 (Wood et al. 2019; [https://github.com/DerrickWood/kraken2/releases](url)) for assigning taxonomic levels to both collapsed and uncollapsed PE reads separately.
+Step 2: Concatenate "collapsed" and "collapsed.truncated" files.
 
-`kraken2 --threads 24 --db /Kraken2_DB/PlusPFP_20210128/ --output trimmed_reads.collapsed.output.txt --report trimmed_reads.collapsed.report.txt trimmed_reads.collapsed
+`cat trimmed_reads.collapsed trimmed_reads.collapsed.truncated > trimmed_reads.collapsed.concat
+`
+
+Step 3: Used Kraken v2.1.3 (Wood et al. 2019; [https://github.com/DerrickWood/kraken2/releases](url)) for assigning taxonomic levels to both collapsed and uncollapsed PE reads separately.
+
+`kraken2 --threads 24 --db /Kraken2_DB/PlusPFP_20210128/ --output trimmed_reads.collapsed.concat.output.txt --report trimmed_reads.collapsed.concat.report.txt trimmed_reads.collapsed.concat
 `
 
 `kraken2 --threads 24 --db /Kraken2_DB/PlusPFP_20210128/ --output trimmed_reads.paired.output.txt --report trimmed_reads.paired.report.txt --paired trimmed_reads.pair1.truncated trimmed_reads.pair2.truncated
 `
 
-Step 3: Used Bracken v2.9 (Lu et al. 2017; [https://github.com/jenniferlu717/Bracken/releases](url)) to reassign Kraken2 results to genera from each of the collapsed and uncollapsed PE reads.
+Step 4: Used Bracken v2.9 (Lu et al. 2017; [https://github.com/jenniferlu717/Bracken/releases](url)) to reassign Kraken2 results to genera from each of the collapsed and uncollapsed PE reads.
 
-`bracken -d /Kraken2_DB/PlusPFP_20210128/ -i trimmed_reads.collapsed.report.txt -o trimmed_reads.collapsed.report.txt.bracken -r 150 -l G -t 10`
+`bracken -d /Kraken2_DB/PlusPFP_20210128/ -i trimmed_reads.collapsed.concat.report.txt -o trimmed_reads.collapsed.concat.report.txt.bracken -r 150 -l G -t 10`
 
 `bracken -d /Kraken2_DB/PlusPFP_20210128/ -i trimmed_reads.paired.report.txt -o trimmed_reads.paired.report.txt.bracken -r 150 -l G -t 10`
 
-Step 4: Used an in-house script (developed by Patrick F. Reilly; patrick.f.reilly@yale.edu) to summarize Bracken results from both collapsed and uncollapsed reads.
 
-`awk -f Bracken_parsing.awk trimmed_reads.collapsed.report.txt.bracken trimmed_reads.paired.report.txt.bracken > trimmed_reads.SUMMARY.report.txt.bracken
+Step 5: Used an in-house script (developed by Patrick F. Reilly; patrick.f.reilly@yale.edu) to summarize Bracken results from both collapsed and uncollapsed reads.
+
+`awk -f Bracken_parsing.awk trimmed_reads.collapsed.concat.report.txt.bracken trimmed_reads.paired.report.txt.bracken > trimmed_reads.SUMMARY.report.txt.bracken
 `
 
 ### 2. Pipeline for the Mapping and Filtering of Ancient DNA PE Reads
