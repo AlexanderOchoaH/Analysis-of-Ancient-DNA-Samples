@@ -34,7 +34,7 @@ Step 5: Used an in-house script (developed by Patrick F. Reilly; patrick.f.reill
 
 ### 2. Pipeline for the Mapping and Filtering of Ancient DNA PE Reads
 
-Step 1: Used a YAML file (paleomix.yml) as input and PALEOMIX v1.3.8 (Schubert et al. 2014; [https://github.com/MikkelSchubert/paleomix/releases](url)) for mapping the AVITI PE150 reads to multiple (competitive mapping) or single (non-competitive mapping) references.
+Step 1: Used a YAML file (paleomix.yml) as input and PALEOMIX v1.3.8 (Schubert et al. 2014; [https://github.com/MikkelSchubert/paleomix/releases](url)) for mapping the AVITI PE150 reads to multiple (competitive mapping) or single (non-competitive mapping) references. Line 81 of the YAML file (paleomix.yml) must be changed to "yes" for the removal of PCR duplicates.
 
 `paleomix bam_pipeline run paleomix.yml --jar-root=${EBROOTPICARD}`
 
